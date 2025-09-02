@@ -2,7 +2,6 @@
 	"name": "smail-web",
 	"private": true,
 	"type": "module",
-	"packageManager": "pnpm@8.15.6",
 	"engines": {
 		"node": ">=20.0.0"
 	},
