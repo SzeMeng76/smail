@@ -1,7 +1,7 @@
 import randomName from "@scaleway/random-name";
-import { Loader2Icon, Mail, RefreshCcwIcon } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader2Icon, Mail, RefreshCcwIcon, Settings } from "lucide-react";
 import { customAlphabet } from "nanoid";
-import React from "react";
+import React, { useState } from "react";
 import {
 	Form,
 	Link,
@@ -90,10 +90,17 @@ export function meta(_: Route.MetaArgs) {
 	];
 }
 
-function generateEmail() {
-	const name = randomName();
-	const random = customAlphabet("0123456789", 4)();
-	return `${name}-${random}@smone.us`;
+function generateEmail(customPrefix?: string) {
+	if (customPrefix && customPrefix.trim()) {
+		// 自定义前缀模式：直接使用用户输入的前缀
+		const cleanPrefix = customPrefix.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+		return `${cleanPrefix}@smone.us`;
+	} else {
+		// 默认随机生成模式
+		const name = randomName();
+		const random = customAlphabet("0123456789", 4)();
+		return `${name}-${random}@smone.us`;
+	}
 }
 
 export async function loader({ request, context }: Route.LoaderArgs) {
@@ -159,11 +166,15 @@ export async function action({ request, context }: Route.ActionArgs) {
 	if (action === "refresh") {
 		return redirect("/");
 	}
-	if (action === "delete") {
+	if (action === "delete" || action === "generate") {
 		const session = await getSession(request.headers.get("Cookie"));
-		session.set("email", generateEmail());
-		await commitSession(session);
-		return redirect("/");
+		const customPrefix = formData.get("customPrefix") as string;
+		session.set("email", generateEmail(customPrefix));
+		return redirect("/", {
+			headers: {
+				"Set-Cookie": await commitSession(session),
+			},
+		});
 	}
 	return null;
 }
@@ -176,6 +187,12 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 		navigation.formData?.get("action") === "refresh" && isSubmitting;
 	const isDeleting =
 		navigation.formData?.get("action") === "delete" && isSubmitting;
+	const isGenerating =
+		navigation.formData?.get("action") === "generate" && isSubmitting;
+
+	// 高级选项状态
+	const [showAdvanced, setShowAdvanced] = useState(false);
+	const [customPrefix, setCustomPrefix] = useState("");
 
 	// 自动刷新逻辑 - 每30秒自动重新验证数据
 	React.useEffect(() => {
@@ -272,16 +289,23 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 											className="w-full h-10 bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all"
 										/>
 										<Form method="post" className="w-full">
+											{showAdvanced && (
+												<input
+													type="hidden"
+													name="customPrefix"
+													value={customPrefix}
+												/>
+											)}
 											<Button
 												variant="outline"
 												size="default"
 												type="submit"
 												name="action"
-												value="delete"
-												disabled={isDeleting}
+												value={showAdvanced && customPrefix ? "generate" : "delete"}
+												disabled={isDeleting || isGenerating}
 												className="w-full h-10 border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-all"
 											>
-												{isDeleting ? (
+												{(isDeleting || isGenerating) ? (
 													<>
 														<Loader2Icon className="w-4 h-4 animate-spin mr-2" />
 														生成中...
@@ -291,6 +315,51 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 												)}
 											</Button>
 										</Form>
+									</div>
+
+									{/* 高级选项 */}
+									<div className="mb-4">
+										<button
+											type="button"
+											onClick={() => setShowAdvanced(!showAdvanced)}
+											className="flex items-center justify-center w-full text-sm text-gray-600 hover:text-blue-600 transition-colors py-2"
+										>
+											<Settings className="w-4 h-4 mr-2" />
+											高级选项
+											{showAdvanced ? (
+												<ChevronUp className="w-4 h-4 ml-2" />
+											) : (
+												<ChevronDown className="w-4 h-4 ml-2" />
+											)}
+										</button>
+
+										{showAdvanced && (
+											<div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+												<div className="space-y-3">
+													<div>
+														<label className="block text-sm font-medium text-gray-700 mb-2">
+															自定义前缀（可选）
+														</label>
+														<input
+															type="text"
+															value={customPrefix}
+															onChange={(e) => setCustomPrefix(e.target.value)}
+															placeholder="输入你想要的前缀，如 work, personal"
+															maxLength={20}
+															className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+														/>
+													</div>
+													<div className="text-xs text-gray-600">
+														<div className="mb-1">
+															• 如果输入前缀：{customPrefix || "'work'"}@smone.us
+														</div>
+														<div>
+															• 如果不输入：随机生成（如 happy-bird-5678@smone.us）
+														</div>
+													</div>
+												</div>
+											</div>
+										)}
 									</div>
 
 									{/* Tips */}

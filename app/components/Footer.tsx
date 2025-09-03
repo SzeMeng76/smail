@@ -14,7 +14,7 @@ export function Footer() {
 							</div>
 							<div>
 								<h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-									Smail
+									SMONE
 								</h3>
 								<p className="text-sm text-gray-400">临时邮箱服务</p>
 							</div>
@@ -132,7 +132,7 @@ export function Footer() {
 				<div className="border-t border-gray-800 mt-8 pt-8">
 					<div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
 						<div className="text-sm text-gray-400">
-							© 2024 Smail. 保留所有权利.
+							© 2024 SMONE. 保留所有权利.
 						</div>
 						<div className="flex space-x-6 text-sm text-gray-400">
 							<span className="text-gray-500">免费 · 安全 · 隐私保护</span>
