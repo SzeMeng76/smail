@@ -90,16 +90,16 @@ export function meta(_: Route.MetaArgs) {
 	];
 }
 
-function generateEmail(customPrefix?: string) {
+function generateEmail(customPrefix?: string, domain = "smone.us") {
 	if (customPrefix && customPrefix.trim()) {
 		// 自定义前缀模式：直接使用用户输入的前缀
 		const cleanPrefix = customPrefix.trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
-		return `${cleanPrefix}@smone.us`;
+		return `${cleanPrefix}@${domain}`;
 	} else {
 		// 默认随机生成模式
 		const name = randomName();
 		const random = customAlphabet("0123456789", 4)();
-		return `${name}-${random}@smone.us`;
+		return `${name}-${random}@${domain}`;
 	}
 }
 
@@ -107,14 +107,26 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 	const session = await getSession(request.headers.get("Cookie"));
 	let email = session.get("email");
 
+	// 从环境变量读取可用域名列表
+	const availableDomains = context.cloudflare.env.AVAILABLE_DOMAINS?.split(',') || ['smone.us'];
+	
+	// 如果有多个域名，随机选择一个；否则使用默认域名
+	const getRandomDomain = () => {
+		if (availableDomains.length > 1) {
+			return availableDomains[Math.floor(Math.random() * availableDomains.length)];
+		}
+		return availableDomains[0];
+	};
+
 	if (!email) {
-		email = generateEmail();
+		email = generateEmail(undefined, getRandomDomain());
 		session.set("email", email);
 		return data(
 			{
 				email,
 				mails: [],
 				stats: { total: 0, unread: 0 },
+				availableDomains,
 			},
 			{
 				headers: {
@@ -147,7 +159,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 			isRead: emailRecord.isRead,
 		}));
 
-		return { email, mails, stats };
+		return { email, mails, stats, availableDomains };
 	} catch (error) {
 		console.error("Error loading emails:", error);
 		// 出错时返回空数据
@@ -155,6 +167,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
 			email,
 			mails: [],
 			stats: { total: 0, unread: 0 },
+			availableDomains,
 		};
 	}
 }
@@ -169,7 +182,8 @@ export async function action({ request, context }: Route.ActionArgs) {
 	if (action === "delete" || action === "generate") {
 		const session = await getSession(request.headers.get("Cookie"));
 		const customPrefix = formData.get("customPrefix") as string;
-		session.set("email", generateEmail(customPrefix));
+		const selectedDomain = formData.get("selectedDomain") as string || "smone.us";
+		session.set("email", generateEmail(customPrefix, selectedDomain));
 		return redirect("/", {
 			headers: {
 				"Set-Cookie": await commitSession(session),
@@ -193,6 +207,17 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 	// 高级选项状态
 	const [showAdvanced, setShowAdvanced] = useState(false);
 	const [customPrefix, setCustomPrefix] = useState("");
+	
+	// 默认域名：如果有多个域名就随机选择，单个域名就用默认
+	const getDefaultDomain = () => {
+		const domains = loaderData.availableDomains || ['smone.us'];
+		if (domains.length > 1) {
+			return domains[Math.floor(Math.random() * domains.length)];
+		}
+		return domains[0];
+	};
+	
+	const [selectedDomain, setSelectedDomain] = useState(() => getDefaultDomain());
 
 	// 自动刷新逻辑 - 每30秒自动重新验证数据
 	React.useEffect(() => {
@@ -290,11 +315,18 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 										/>
 										<Form method="post" className="w-full">
 											{showAdvanced && (
-												<input
-													type="hidden"
-													name="customPrefix"
-													value={customPrefix}
-												/>
+												<>
+													<input
+														type="hidden"
+														name="customPrefix"
+														value={customPrefix}
+													/>
+													<input
+														type="hidden"
+														name="selectedDomain"
+														value={selectedDomain}
+													/>
+												</>
 											)}
 											<Button
 												variant="outline"
@@ -337,7 +369,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
 										{showAdvanced && (
 											<div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-												<div className="space-y-3">
+												<div className="space-y-4">
 													<div>
 														<label className="block text-sm font-medium text-gray-700 mb-2">
 															自定义前缀（可选）
@@ -351,6 +383,35 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 															className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
 														/>
 													</div>
+
+													<div>
+														<label className="block text-sm font-medium text-gray-700 mb-2">
+															选择域名
+														</label>
+														<div className="flex gap-2">
+															<select
+																value={selectedDomain}
+																onChange={(e) => setSelectedDomain(e.target.value)}
+																className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+															>
+																{loaderData.availableDomains?.map((domain) => (
+																	<option key={domain} value={domain}>
+																		{domain}
+																	</option>
+																))}
+															</select>
+															{loaderData.availableDomains && loaderData.availableDomains.length > 1 && (
+																<button
+																	type="button"
+																	onClick={() => setSelectedDomain(getDefaultDomain())}
+																	className="px-3 py-2 text-xs bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-md transition-colors"
+																	title="随机选择域名"
+																>
+																	🎲
+																</button>
+															)}
+														</div>
+													</div>
 													{/* 实时预览 */}
 													{customPrefix && (
 														<div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
@@ -358,17 +419,17 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 																📧 预览邮箱地址：
 															</div>
 															<div className="font-mono text-green-700 font-bold">
-																{customPrefix.toLowerCase().replace(/[^a-z0-9-]/g, '')}@smone.us
+																{customPrefix.toLowerCase().replace(/[^a-z0-9-]/g, '')}@{selectedDomain}
 															</div>
 														</div>
 													)}
 													
 													<div className="text-xs text-gray-600 mt-3">
 														<div className="mb-1">
-															• 输入前缀生成：如 work@smone.us
+															• 输入前缀生成：如 work@{selectedDomain}
 														</div>
 														<div>
-															• 不输入前缀：随机生成（如 happy-bird-5678@smone.us）
+															• 不输入前缀：随机生成（如 happy-bird-5678@{selectedDomain}）
 														</div>
 													</div>
 												</div>
