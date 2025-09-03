@@ -36,12 +36,12 @@ export function meta(_: Route.MetaArgs) {
 	return [
 		{
 			title:
-				"Smail - 免费临时邮箱生成器 | 一次性邮箱地址生成 | 24小时有效保护隐私",
+				"SMONE - 免费临时邮箱生成器 | 一次性邮箱地址生成 | 24小时有效保护隐私",
 		},
 		{
 			name: "description",
 			content:
-				"Smail提供最专业的免费临时邮箱服务，无需注册即可获得一次性邮件地址。24小时有效期，支持附件下载，完全匿名保护隐私。告别垃圾邮件，立即免费使用临时邮箱！",
+				"SMONE提供最专业的免费临时邮箱服务，无需注册即可获得一次性邮件地址。24小时有效期，支持附件下载，完全匿名保护隐私。告别垃圾邮件，立即免费使用临时邮箱！",
 		},
 		{
 			name: "keywords",
@@ -52,7 +52,7 @@ export function meta(_: Route.MetaArgs) {
 		// Open Graph 优化
 		{
 			property: "og:title",
-			content: "Smail - 免费临时邮箱生成器 | 一次性邮件地址",
+			content: "SMONE - 免费临时邮箱生成器 | 一次性邮件地址",
 		},
 		{
 			property: "og:description",
@@ -61,12 +61,12 @@ export function meta(_: Route.MetaArgs) {
 		},
 		{ property: "og:type", content: "website" },
 		{ property: "og:url", content: "https://smone.us" },
-		{ property: "og:site_name", content: "Smail" },
+		{ property: "og:site_name", content: "SMONE" },
 		{ property: "og:locale", content: "zh_CN" },
 
 		// Twitter Card
 		{ name: "twitter:card", content: "summary_large_image" },
-		{ name: "twitter:title", content: "Smail - 免费临时邮箱生成器" },
+		{ name: "twitter:title", content: "SMONE - 免费临时邮箱生成器" },
 		{
 			name: "twitter:description",
 			content: "保护隐私的免费临时邮箱，无需注册，即时使用。",
@@ -84,8 +84,8 @@ export function meta(_: Route.MetaArgs) {
 		{ name: "theme-color", content: "#2563eb" },
 
 		// 结构化数据
-		{ name: "application-name", content: "Smail" },
-		{ name: "apple-mobile-web-app-title", content: "Smail" },
+		{ name: "application-name", content: "SMONE" },
+		{ name: "apple-mobile-web-app-title", content: "SMONE" },
 		{ name: "msapplication-TileColor", content: "#2563eb" },
 	];
 }
@@ -391,7 +391,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 					<div className="mt-16">
 						<div className="text-center mb-8">
 							<h3 className="text-2xl font-bold text-gray-800 mb-2">
-								为什么选择 Smail？
+								为什么选择 SMONE？
 							</h3>
 							<p className="text-gray-600">
 								专业的临时邮箱服务，保护您的隐私安全

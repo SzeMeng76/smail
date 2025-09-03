@@ -13,11 +13,11 @@ import type { Route } from "./+types/contact";
 
 export function meta(_: Route.MetaArgs) {
 	return [
-		{ title: "联系Smail团队 - 技术支持、反馈建议、商务合作" },
+		{ title: "联系SMONE团队 - 技术支持、反馈建议、商务合作" },
 		{
 			name: "description",
 			content:
-				"联系Smail团队获取技术支持、反馈问题或合作咨询。我们提供多种联系方式，快速响应用户需求。如遇临时邮箱使用问题、功能建议或商务合作，欢迎随时联系我们。",
+				"联系SMONE团队获取技术支持、反馈问题或合作咨询。我们提供多种联系方式，快速响应用户需求。如遇临时邮箱使用问题、功能建议或商务合作，欢迎随时联系我们。",
 		},
 	];
 }

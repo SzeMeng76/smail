@@ -13,11 +13,11 @@ import type { Route } from "./+types/faq";
 
 export function meta(_: Route.MetaArgs) {
 	return [
-		{ title: "常见问题解答 - Smail临时邮箱使用指南及疑难解答" },
+		{ title: "常见问题解答 - SMONE临时邮箱使用指南及疑难解答" },
 		{
 			name: "description",
 			content:
-				"Smail临时邮箱常见问题全面解答：如何使用一次性邮箱、邮件保存时长、附件下载、隐私安全等。快速找到使用临时邮箱服务的答案，轻松上手免费临时邮件服务。",
+				"SMONE临时邮箱常见问题全面解答：如何使用一次性邮箱、邮件保存时长、附件下载、隐私安全等。快速找到使用临时邮箱服务的答案，轻松上手免费临时邮件服务。",
 		},
 	];
 }
@@ -32,9 +32,9 @@ export default function FAQ() {
 		},
 		{
 			id: "is-free",
-			question: "Smail临时邮箱是免费的吗？",
+			question: "SMONE临时邮箱是免费的吗？",
 			answer:
-				"是的，Smail完全免费。我们不收取任何费用，也没有隐藏收费。您可以无限制地使用我们的服务。",
+				"是的，SMONE完全免费。我们不收取任何费用，也没有隐藏收费。您可以无限制地使用我们的服务。",
 		},
 		{
 			id: "retention-time",
@@ -46,7 +46,7 @@ export default function FAQ() {
 			id: "can-send",
 			question: "我可以发送邮件吗？",
 			answer:
-				"目前Smail只支持接收邮件，不支持发送邮件。这是为了防止垃圾邮件传播和保护我们的服务质量。",
+				"目前SMONE只支持接收邮件，不支持发送邮件。这是为了防止垃圾邮件传播和保护我们的服务质量。",
 		},
 		{
 			id: "security",
@@ -102,7 +102,7 @@ export default function FAQ() {
 						</span>
 					</h1>
 					<p className="text-base sm:text-lg lg:text-xl text-gray-600">
-						找到您关于Smail临时邮箱服务的答案
+						找到您关于SMONE临时邮箱服务的答案
 					</p>
 				</div>
 			</section>
@@ -170,7 +170,7 @@ export default function FAQ() {
 								访问主页
 							</h3>
 							<p className="text-gray-600 text-sm sm:text-base">
-								打开Smail主页，系统会自动为您生成临时邮箱
+								打开SMONE主页，系统会自动为您生成临时邮箱
 							</p>
 						</div>
 						<div className="w-full text-center">

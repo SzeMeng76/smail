@@ -13,11 +13,11 @@ import type { Route } from "./+types/terms";
 
 export function meta(_: Route.MetaArgs) {
 	return [
-		{ title: "服务使用条款 - Smail临时邮箱用户协议及使用规范" },
+		{ title: "服务使用条款 - SMONE临时邮箱用户协议及使用规范" },
 		{
 			name: "description",
 			content:
-				"阅读Smail临时邮箱完整服务条款，包含使用规则、服务范围、用户责任、免责声明等。了解免费临时邮件服务的合理使用政策，确保安全合规使用一次性邮箱。",
+				"阅读SMONE临时邮箱完整服务条款，包含使用规则、服务范围、用户责任、免责声明等。了解免费临时邮件服务的合理使用政策，确保安全合规使用一次性邮箱。",
 		},
 	];
 }
@@ -30,7 +30,7 @@ export default function Terms() {
 				<div className="max-w-screen-xl mx-auto px-3 sm:px-4 py-4 flex items-center justify-between">
 					<Button asChild variant="ghost" size="sm">
 						<Link to="/">
-							<span className="font-bold text-xl">Smail</span>
+							<span className="font-bold text-xl">SMONE</span>
 						</Link>
 					</Button>
 					<nav className="flex items-center gap-1 sm:gap-4">
@@ -69,7 +69,7 @@ export default function Terms() {
 						服务条款
 					</h1>
 					<p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-3 sm:mb-4">
-						使用Smail服务前，请仔细阅读以下服务条款
+						使用SMONE服务前，请仔细阅读以下服务条款
 					</p>
 					<p className="text-sm text-gray-500">最后更新时间：2025年1月15日</p>
 				</div>
@@ -82,11 +82,11 @@ export default function Terms() {
 						<Card>
 							<CardHeader>
 								<CardTitle>服务概述</CardTitle>
-								<CardDescription>Smail提供的服务内容和范围</CardDescription>
+								<CardDescription>SMONE提供的服务内容和范围</CardDescription>
 							</CardHeader>
 							<CardContent className="prose max-w-none">
 								<p className="text-gray-600 mb-4">
-									Smail（以下简称"我们"或"本服务"）是一个免费的临时邮箱服务平台。
+									SMONE（以下简称"我们"或"本服务"）是一个免费的临时邮箱服务平台。
 									通过使用我们的服务，您可以：
 								</p>
 								<ul className="list-disc pl-6 space-y-1 text-gray-600">
@@ -105,7 +105,7 @@ export default function Terms() {
 							</CardHeader>
 							<CardContent className="prose max-w-none">
 								<p className="text-gray-600">
-									通过访问和使用Smail服务，您确认已阅读、理解并同意受本服务条款的约束。
+									通过访问和使用SMONE服务，您确认已阅读、理解并同意受本服务条款的约束。
 									如果您不同意这些条款，请不要使用我们的服务。
 								</p>
 								<p className="text-gray-600 mt-4">
@@ -241,7 +241,7 @@ export default function Terms() {
 							</CardHeader>
 							<CardContent className="prose max-w-none">
 								<p className="text-gray-600 mb-4">
-									Smail服务的所有内容，包括但不限于：
+									SMONE服务的所有内容，包括但不限于：
 								</p>
 								<ul className="list-disc pl-6 space-y-1 text-gray-600">
 									<li>网站设计和界面</li>

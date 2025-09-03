@@ -15,19 +15,19 @@ export function meta() {
 	return [
 		{
 			title:
-				"Smail - 免费临时邮箱服务 | 一次性邮件地址生成器，无需注册即时使用，24小时有效保护隐私",
+				"SMONE - 免费临时邮箱服务 | 一次性邮件地址生成器，无需注册即时使用，24小时有效保护隐私",
 		},
 		{
 			name: "description",
 			content:
-				"Smail提供免费、安全、无广告的临时邮箱服务。无需注册，即时获取临时邮箱地址，保护您的隐私，避免垃圾邮件。24小时有效期，支持附件，完全免费。",
+				"SMONE提供免费、安全、无广告的临时邮箱服务。无需注册，即时获取临时邮箱地址，保护您的隐私，避免垃圾邮件。24小时有效期，支持附件，完全免费。",
 		},
 		{
 			name: "keywords",
 			content:
 				"临时邮箱,一次性邮箱,临时邮件,disposable email,temp mail,临时email,免费邮箱,隐私保护,垃圾邮件防护",
 		},
-		{ name: "author", content: "Smail Team" },
+		{ name: "author", content: "SMONE Team" },
 		{ name: "robots", content: "index, follow" },
 		{ name: "googlebot", content: "index, follow" },
 
@@ -35,20 +35,20 @@ export function meta() {
 		{ property: "og:type", content: "website" },
 		{
 			property: "og:title",
-			content: "Smail - 免费临时邮箱服务 | 一次性邮件地址生成器",
+			content: "SMONE - 免费临时邮箱服务 | 一次性邮件地址生成器",
 		},
 		{
 			property: "og:description",
 			content: "保护隐私的免费临时邮箱服务，无需注册，即时使用，24小时有效。",
 		},
-		{ property: "og:site_name", content: "Smail" },
+		{ property: "og:site_name", content: "SMONE" },
 		{ property: "og:locale", content: "zh_CN" },
 
 		// Twitter Card
 		{ name: "twitter:card", content: "summary_large_image" },
 		{
 			name: "twitter:title",
-			content: "Smail - 免费临时邮箱服务 | 一次性邮件地址生成器",
+			content: "SMONE - 免费临时邮箱服务 | 一次性邮件地址生成器",
 		},
 		{
 			name: "twitter:description",
@@ -60,7 +60,7 @@ export function meta() {
 		{ name: "mobile-web-app-capable", content: "yes" },
 		{ name: "apple-mobile-web-app-capable", content: "yes" },
 		{ name: "apple-mobile-web-app-status-bar-style", content: "default" },
-		{ name: "apple-mobile-web-app-title", content: "Smail" },
+		{ name: "apple-mobile-web-app-title", content: "SMONE" },
 	];
 }
 
@@ -110,7 +110,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	const structuredData = {
 		"@context": "https://schema.org",
 		"@type": "WebApplication",
-		name: "Smail",
+		name: "SMONE",
 		description: "免费临时邮箱服务，保护隐私，避免垃圾邮件",
 		url: "https://smone.us",
 		applicationCategory: "UtilityApplication",
@@ -122,7 +122,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 		},
 		author: {
 			"@type": "Organization",
-			name: "Smail Team",
+			name: "SMONE Team",
 		},
 		keywords: "临时邮箱,一次性邮箱,临时邮件,disposable email,temp mail",
 		applicationSubCategory: "Email Service",

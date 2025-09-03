@@ -157,10 +157,10 @@ function formatFileSize(bytes?: number | null) {
 export function meta({ data }: Route.MetaArgs) {
 	if (!data?.email) {
 		return [
-			{ title: "邮件详情 - Smail临时邮箱" },
+			{ title: "邮件详情 - SMONE临时邮箱" },
 			{
 				name: "description",
-				content: "查看您在Smail临时邮箱中收到的邮件详情。",
+				content: "查看您在SMONE临时邮箱中收到的邮件详情。",
 			},
 			// 即使是404页面也要阻止索引
 			{
@@ -183,7 +183,7 @@ export function meta({ data }: Route.MetaArgs) {
 	const shortSubject = email.subject?.substring(0, 30) || "无主题";
 
 	return [
-		{ title: `${shortSubject} - 来自${fromDomain}的邮件 | Smail临时邮箱` },
+		{ title: `${shortSubject} - 来自${fromDomain}的邮件 | SMONE临时邮箱` },
 		{
 			name: "description",
 			content: `查看来自${email.fromAddress}的邮件"${email.subject || "无主题"}"。接收时间：${new Date(email.receivedAt).toLocaleDateString("zh-CN")}。`,

@@ -8,7 +8,7 @@ export function Navigation({ currentPath = "/" }: { currentPath?: string }) {
 
 	const navItems = [
 		{ href: "/", label: "首页", description: "获取临时邮箱" },
-		{ href: "/about", label: "关于", description: "了解 Smail" },
+		{ href: "/about", label: "关于", description: "了解 SMONE" },
 		{ href: "/faq", label: "FAQ", description: "常见问题" },
 		{ href: "/contact", label: "联系", description: "联系我们" },
 	];
@@ -27,7 +27,7 @@ export function Navigation({ currentPath = "/" }: { currentPath?: string }) {
 						</div>
 						<div>
 							<h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-								Smail
+								SMONE
 							</h1>
 							<p className="text-sm text-gray-600">临时邮箱服务</p>
 						</div>

@@ -13,11 +13,11 @@ import type { Route } from "./+types/privacy";
 
 export function meta(_: Route.MetaArgs) {
 	return [
-		{ title: "隐私保护政策 - Smail如何保障用户数据安全和隐私" },
+		{ title: "隐私保护政策 - SMONE如何保障用户数据安全和隐私" },
 		{
 			name: "description",
 			content:
-				"查看Smail临时邮箱详细隐私政策，了解数据收集、使用、保护措施。我们承诺24小时自动删除邮件，不保存用户个人信息，SSL加密传输，全面保障您的隐私安全。",
+				"查看SMONE临时邮箱详细隐私政策，了解数据收集、使用、保护措施。我们承诺24小时自动删除邮件，不保存用户个人信息，SSL加密传输，全面保障您的隐私安全。",
 		},
 	];
 }
@@ -30,7 +30,7 @@ export default function Privacy() {
 				<div className="max-w-screen-xl mx-auto px-3 sm:px-4 py-4 flex items-center justify-between">
 					<Button asChild variant="ghost" size="sm">
 						<Link to="/">
-							<span className="font-bold text-xl">Smail</span>
+							<span className="font-bold text-xl">SMONE</span>
 						</Link>
 					</Button>
 					<nav className="flex items-center gap-1 sm:gap-4">

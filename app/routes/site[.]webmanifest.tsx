@@ -2,8 +2,8 @@ import type { LoaderFunctionArgs } from "react-router";
 
 export function loader(_: LoaderFunctionArgs) {
 	const manifest = {
-		name: "Smail - 临时邮箱服务",
-		short_name: "Smail",
+		name: "SMONE - 临时邮箱服务",
+		short_name: "SMONE",
 		description: "免费、安全、无广告的临时邮箱服务",
 		start_url: "/",
 		display: "standalone",

@@ -13,11 +13,11 @@ import type { Route } from "./+types/about";
 
 export function meta(_: Route.MetaArgs) {
 	return [
-		{ title: "关于Smail团队 - 致力于打造最安全的临时邮箱平台" },
+		{ title: "关于SMONE团队 - 致力于打造最安全的临时邮箱平台" },
 		{
 			name: "description",
 			content:
-				"了解Smail团队和我们的使命：为全球用户提供免费、安全、无广告的临时邮箱服务。专注隐私保护，助力用户远离垃圾邮件困扰，打造最可靠的一次性邮箱平台。",
+				"了解SMONE团队和我们的使命：为全球用户提供免费、安全、无广告的临时邮箱服务。专注隐私保护，助力用户远离垃圾邮件困扰，打造最可靠的一次性邮箱平台。",
 		},
 	];
 }
@@ -54,11 +54,11 @@ export default function About() {
 					<h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-4 sm:mb-6">
 						关于{" "}
 						<span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-							Smail
+							SMONE
 						</span>
 					</h1>
 					<p className="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8">
-						Smail
+						SMONE
 						是一个免费、安全、易用的临时邮箱服务，帮助您保护隐私，避免垃圾邮件
 					</p>
 				</div>
@@ -68,7 +68,7 @@ export default function About() {
 			<section className="py-8 sm:py-16">
 				<div className="max-w-screen-xl mx-auto px-3 sm:px-4">
 					<h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12">
-						为什么选择 Smail？
+						为什么选择 SMONE？
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 						{features.map((feature) => (
