@@ -31,6 +31,8 @@ pnpm install
 
 ### 配置环境变量
 
+#### 方式1：本地开发环境（推荐用于开发）
+
 复制环境变量示例文件并配置：
 
 ```bash
@@ -40,11 +42,32 @@ cp .dev.vars.example .dev.vars
 编辑 `.dev.vars` 文件，设置必要的环境变量：
 
 ```bash
-# 生成 Session 密钥
-openssl rand -base64 32
+# Session 密钥 - 用于用户会话加密
+SESSION_SECRET=your-generated-secret-key
 
-# 将生成的密钥填入 .dev.vars 文件中的 SESSION_SECRET
+# 生成新的 Session 密钥命令：
+openssl rand -base64 32
 ```
+
+#### 方式2：生产环境配置（推荐用于部署）
+
+**为避免每次部署时环境变量被清空，建议在 `wrangler.jsonc` 中配置：**
+
+```jsonc
+{
+  // ... 其他配置
+  "vars": {
+    "ENVIRONMENT": "production",
+    "SESSION_SECRET": "your-generated-secret-key",
+    "AVAILABLE_DOMAINS": "smone.us,your-domain.com"
+  }
+}
+```
+
+**支持的环境变量：**
+- `SESSION_SECRET`: 用户会话加密密钥（必需）
+- `AVAILABLE_DOMAINS`: 可用域名列表，逗号分隔（可选，默认：smone.us）
+- `ENVIRONMENT`: 运行环境标识（可选）
 
 ### 设置数据库
 
@@ -131,16 +154,42 @@ pnpm wrangler versions deploy
    - 设置 Email Routing
 
 2. **配置 wrangler.jsonc**:
-   复制 `wrangler.example.jsonc` 并填入你的资源ID：
-   ```bash
-   cp wrangler.example.jsonc wrangler.jsonc
-   # 编辑 wrangler.jsonc，填入实际的ID
+   确保 `wrangler.jsonc` 包含所有必要配置：
+   ```jsonc
+   {
+     "name": "your-app-name",
+     "vars": {
+       "SESSION_SECRET": "your-session-secret",
+       "AVAILABLE_DOMAINS": "your-domain.com"
+     },
+     "d1_databases": [
+       {
+         "binding": "DB",
+         "database_name": "smail-database",
+         "database_id": "your-database-id"
+       }
+     ]
+     // ... 其他配置
+   }
    ```
 
 3. **运行远程迁移**:
    ```bash
    pnpm run db:migrate:remote
    ```
+
+### 📋 环境变量管理
+
+**❗ 重要提示：为避免变量在部署时被清空**
+
+- ✅ **推荐**：在 `wrangler.jsonc` 的 `vars` 字段中配置
+- ❌ **不推荐**：仅在 Cloudflare Dashboard 中配置（可能被清空）
+- 📝 **开发时**：使用 `.dev.vars` 文件
+
+**添加新变量的步骤：**
+1. 在 `wrangler.jsonc` 的 `vars` 中添加
+2. 重新部署：`pnpm run deploy`
+3. 变量会持久保存，不会被清空
 
 ## 📂 项目结构
 
