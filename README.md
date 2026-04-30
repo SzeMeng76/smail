@@ -193,7 +193,27 @@ pnpm wrangler versions deploy
    - 创建 D1 数据库：`wrangler d1 create smail-database`
    - 创建 KV 命名空间：`wrangler kv namespace create "smail-kv"`
    - 创建 R2 存储桶：`wrangler r2 bucket create smail-attachments`
-   - 设置 Email Routing
+   
+   **配置 Email Routing（重要！）**:
+   
+   a. 在 Cloudflare Dashboard 中配置：
+      - 登录 [Cloudflare Dashboard](https://dash.cloudflare.com)
+      - 选择你的域名
+      - 进入 **Email** → **Email Routing**
+      - 点击 **Enable Email Routing**（如果还未启用）
+      - Cloudflare 会自动添加必要的 MX 记录到你的 DNS
+   
+   b. 配置 Catch-all 规则：
+      - 在 Email Routing 页面，找到 **Routing rules** 部分
+      - 点击 **Catch-all address** 标签
+      - 选择 **Action**: `Send to a Worker`
+      - 选择你的 Worker: `smail`（或你在 wrangler.jsonc 中配置的 name）
+      - 点击 **Save**
+   
+   c. 验证配置：
+      - 确保 DNS 中的 MX 记录已生效（可能需要几分钟）
+      - 检查 Email Routing 状态显示为 **Enabled**
+      - Catch-all 规则应该显示为 **Active**
 
 2. **配置 wrangler.jsonc**:
    确保 `wrangler.jsonc` 包含所有必要配置：
@@ -202,7 +222,7 @@ pnpm wrangler versions deploy
      "name": "your-app-name",
      "vars": {
        "SESSION_SECRET": "your-session-secret",
-       "AVAILABLE_DOMAINS": "smone.us,temp.example.com,mail.yourdomain.org"
+       "AVAILABLE_DOMAINS": "smone.us,temp.example.com,mail.yourdomain.org"  // ⚠️ 必须配置你的域名
      },
      "d1_databases": [
        {
@@ -214,6 +234,11 @@ pnpm wrangler versions deploy
      // ... 其他配置
    }
    ```
+   
+   **⚠️ 重要提示**：
+   - `AVAILABLE_DOMAINS` 必须配置为你在 Cloudflare 中设置 Email Routing 的域名
+   - 如果不配置此变量，将无法接收邮件
+   - 支持多个域名，用逗号分隔
 
 3. **运行远程迁移**:
    ```bash
@@ -259,6 +284,43 @@ pnpm wrangler versions deploy
 - 暗色模式
 - 现代化 UI 组件
 - 自定义设计系统
+
+## 🔧 故障排查
+
+### 收不到邮件？
+
+如果部署后无法接收邮件，请按以下步骤检查：
+
+1. **检查 AVAILABLE_DOMAINS 配置**
+   - 确认 `wrangler.jsonc` 中的 `vars.AVAILABLE_DOMAINS` 已配置
+   - 域名必须与 Cloudflare Email Routing 中配置的域名一致
+   - 重新部署：`pnpm run deploy`
+
+2. **检查 Cloudflare Email Routing**
+   - 登录 Cloudflare Dashboard
+   - 进入你的域名 → Email → Email Routing
+   - 确认 Email Routing 状态为 **Enabled**
+   - 确认 Catch-all 规则已配置为 `Send to a Worker: smail`
+   - 检查 MX 记录是否已生效（DNS 传播可能需要几分钟到几小时）
+
+3. **检查 Worker 日志**
+   - 在 Cloudflare Dashboard 中查看 Worker 日志
+   - 发送测试邮件后，查看是否有错误信息
+   - 使用 `wrangler tail` 实时查看日志：
+     ```bash
+     pnpm wrangler tail
+     ```
+
+4. **测试邮件接收**
+   - 使用外部邮箱（如 Gmail）发送测试邮件到 `test@你的域名.com`
+   - 检查 Worker 日志中是否有收到邮件的记录
+   - 在应用中查看是否显示邮件
+
+5. **常见问题**
+   - **MX 记录未生效**：等待 DNS 传播完成（使用 `dig MX 你的域名.com` 检查）
+   - **Worker 名称不匹配**：确保 Email Routing 中选择的 Worker 名称与 `wrangler.jsonc` 中的 `name` 一致
+   - **域名未配置**：必须在 `AVAILABLE_DOMAINS` 中添加域名
+   - **数据库未迁移**：运行 `pnpm run db:migrate:remote`
 
 ## 🤝 贡献
 

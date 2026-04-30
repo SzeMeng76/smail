@@ -98,7 +98,7 @@ function generateEmail(customPrefix?: string, domain = "smone.us") {
 	} else {
 		// 默认随机生成模式
 		const name = randomName();
-		const random = customAlphabet("0123456789", 4)();
+		const random = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 6)();
 		return `${name}-${random}@${domain}`;
 	}
 }
