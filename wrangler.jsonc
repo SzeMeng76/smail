@@ -38,6 +38,7 @@
 	},
 	"vars": {
 		"ENVIRONMENT": "production",
-		"SESSION_SECRET": "thK2KeRhyJ2opKs6JCsKyYJlnLDNyp5oPKflkmK6Udk="
+		"SESSION_SECRET": "thK2KeRhyJ2opKs6JCsKyYJlnLDNyp5oPKflkmK6Udk=",
+		"AVAILABLE_DOMAINS": "smone.us,pintarcollege.org"
 	}
 }
