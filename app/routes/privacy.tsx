@@ -17,7 +17,7 @@ export function meta(_: Route.MetaArgs) {
 		{
 			name: "description",
 			content:
-				"查看SMONE临时邮箱详细隐私政策，了解数据收集、使用、保护措施。我们承诺24小时自动删除邮件，不保存用户个人信息，SSL加密传输，全面保障您的隐私安全。",
+				"查看SMONE临时邮箱详细隐私政策，了解数据收集、使用、保护措施。我们承诺7天后自动删除邮件，不保存用户个人信息，SSL加密传输，全面保障您的隐私安全。",
 		},
 	];
 }
@@ -164,7 +164,7 @@ export default function Privacy() {
 								<ul className="list-disc pl-6 space-y-2 text-gray-600">
 									<li>
 										<strong>邮件内容：</strong>
-										临时邮箱过期后（通常24小时）自动删除
+										临时邮箱过期后（通常7天）自动删除
 									</li>
 									<li>
 										<strong>访问日志：</strong>保留30天用于安全监控

@@ -149,7 +149,7 @@ export default function Terms() {
 							<CardContent className="prose max-w-none">
 								<ul className="list-disc pl-6 space-y-2 text-gray-600">
 									<li>
-										<strong>邮箱有效期：</strong>临时邮箱通常在24小时后自动过期
+										<strong>邮箱有效期：</strong>临时邮箱通常在7天后自动过期
 									</li>
 									<li>
 										<strong>存储限制：</strong>单个邮箱最多存储100封邮件

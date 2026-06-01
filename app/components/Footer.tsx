@@ -21,7 +21,7 @@ export function Footer() {
 						</div>
 						<p className="text-gray-300 leading-relaxed mb-4">
 							保护您的隐私，避免垃圾邮件。提供安全、免费、无广告的临时邮箱服务。
-							无需注册，即时获取，24小时有效期，完全保护您的真实邮箱地址。
+							无需注册，即时获取，7天有效期，完全保护您的真实邮箱地址。
 						</p>
 						<div className="flex space-x-4">
 							<Link

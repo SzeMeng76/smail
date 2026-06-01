@@ -36,17 +36,17 @@ export function meta(_: Route.MetaArgs) {
 	return [
 		{
 			title:
-				"SMONE - 免费临时邮箱生成器 | 一次性邮箱地址生成 | 24小时有效保护隐私",
+				"SMONE - 免费临时邮箱生成器 | 一次性邮箱地址生成 | 7天有效保护隐私",
 		},
 		{
 			name: "description",
 			content:
-				"SMONE提供最专业的免费临时邮箱服务，无需注册即可获得一次性邮件地址。24小时有效期，支持附件下载，完全匿名保护隐私。告别垃圾邮件，立即免费使用临时邮箱！",
+				"SMONE提供最专业的免费临时邮箱服务，无需注册即可获得一次性邮件地址。7天有效期，支持附件下载，完全匿名保护隐私。告别垃圾邮件，立即免费使用临时邮箱！",
 		},
 		{
 			name: "keywords",
 			content:
-				"临时邮箱,一次性邮箱,临时邮件,临时email,免费邮箱,隐私保护,垃圾邮件防护,临时邮箱网站,免费临时邮箱,临时邮箱服务,24小时邮箱,无需注册邮箱",
+				"临时邮箱,一次性邮箱,临时邮件,临时email,免费邮箱,隐私保护,垃圾邮件防护,临时邮箱网站,免费临时邮箱,临时邮箱服务,7天邮箱,无需注册邮箱",
 		},
 
 		// Open Graph 优化
@@ -57,7 +57,7 @@ export function meta(_: Route.MetaArgs) {
 		{
 			property: "og:description",
 			content:
-				"保护隐私的免费临时邮箱，无需注册，即时使用，24小时有效，支持附件下载。",
+				"保护隐私的免费临时邮箱，无需注册，即时使用，7天有效，支持附件下载。",
 		},
 		{ property: "og:type", content: "website" },
 		{ property: "og:url", content: "https://smone.us" },
@@ -264,7 +264,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 							</span>
 						</h2>
 						<p className="text-lg text-gray-600 max-w-2xl mx-auto">
-							无需注册，即时获取临时邮箱地址。24小时有效期，完全免费，保护您的真实邮箱免受垃圾邮件骚扰。
+							无需注册，即时获取临时邮箱地址。7天有效期，完全免费，保护您的真实邮箱免受垃圾邮件骚扰。
 						</p>
 					</div>
 
@@ -282,7 +282,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 									</CardTitle>
 									<div className="flex flex-wrap items-center gap-2 text-sm">
 										<span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-											✓ 24小时有效
+											✓ 7天有效
 										</span>
 										<span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
 											⚡ 自动刷新
@@ -448,7 +448,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 													使用提示
 												</p>
 												<p className="text-blue-700 leading-relaxed">
-													发送邮件到此地址即可在右侧收件箱查看，邮箱24小时后自动过期。收件箱每10秒自动刷新检查新邮件。
+													发送邮件到此地址即可在右侧收件箱查看，邮箱7天后自动过期。收件箱每10秒自动刷新检查新邮件。
 												</p>
 											</div>
 										</div>

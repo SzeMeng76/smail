@@ -2,9 +2,9 @@ import { env } from "cloudflare:workers";
 import { createWorkersKVSessionStorage } from "@react-router/cloudflare";
 import { createCookie } from "react-router";
 
-// 24 小时过期（与邮箱保留时间一致）
+// 7 天过期（与邮箱保留时间一致）
 // Session 会自动过期，KV 中的过期数据会被 Cloudflare 自动清理
-const SESSION_MAX_AGE = 24 * 60 * 60; // 86400 秒
+const SESSION_MAX_AGE = 7 * 24 * 60 * 60; // 604800 秒
 
 const sessionCookie = createCookie("__session", {
 	secrets: [env.SESSION_SECRET],

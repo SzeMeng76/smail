@@ -37,8 +37,8 @@ export async function getOrCreateMailbox(
 		return existing[0];
 	}
 
-	// 创建新邮箱（24小时过期）
-	const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24小时后过期
+	// 创建新邮箱（7天过期）
+	const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7天后过期
 
 	const newMailbox: NewMailbox = {
 		id: nanoid(),

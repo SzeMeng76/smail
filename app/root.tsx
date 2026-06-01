@@ -15,12 +15,12 @@ export function meta() {
 	return [
 		{
 			title:
-				"SMONE - 免费临时邮箱服务 | 一次性邮件地址生成器，无需注册即时使用，24小时有效保护隐私",
+				"SMONE - 免费临时邮箱服务 | 一次性邮件地址生成器，无需注册即时使用，7天有效保护隐私",
 		},
 		{
 			name: "description",
 			content:
-				"SMONE提供免费、安全、无广告的临时邮箱服务。无需注册，即时获取临时邮箱地址，保护您的隐私，避免垃圾邮件。24小时有效期，支持附件，完全免费。",
+				"SMONE提供免费、安全、无广告的临时邮箱服务。无需注册，即时获取临时邮箱地址，保护您的隐私，避免垃圾邮件。7天有效期，支持附件，完全免费。",
 		},
 		{
 			name: "keywords",
@@ -39,7 +39,7 @@ export function meta() {
 		},
 		{
 			property: "og:description",
-			content: "保护隐私的免费临时邮箱服务，无需注册，即时使用，24小时有效。",
+			content: "保护隐私的免费临时邮箱服务，无需注册，即时使用，7天有效。",
 		},
 		{ property: "og:site_name", content: "SMONE" },
 		{ property: "og:locale", content: "zh_CN" },
@@ -130,7 +130,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			"免费使用",
 			"无需注册",
 			"隐私保护",
-			"24小时有效期",
+			"7天有效期",
 			"支持附件",
 			"实时接收邮件",
 		],
