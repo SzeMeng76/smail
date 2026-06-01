@@ -190,10 +190,24 @@ export async function action({ request, context }: Route.ActionArgs) {
 			},
 		});
 	}
+	if (action === "restore") {
+		const restoreEmail = (formData.get("restoreEmail") as string || "").trim().toLowerCase();
+		// 基本格式校验
+		if (restoreEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(restoreEmail)) {
+			const session = await getSession(request.headers.get("Cookie"));
+			session.set("email", restoreEmail);
+			return redirect("/", {
+				headers: {
+					"Set-Cookie": await commitSession(session),
+				},
+			});
+		}
+		return data({ restoreError: "请输入有效的邮箱地址" });
+	}
 	return null;
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Home({ loaderData, actionData }: Route.ComponentProps) {
 	const navigation = useNavigation();
 	const revalidator = useRevalidator();
 	const isSubmitting = navigation.state === "submitting";
@@ -434,6 +448,31 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 													</div>
 												</div>
 											</div>
+										)}
+									</div>
+
+									{/* 恢复已有邮箱 */}
+									<div className="mb-4">
+										<Form method="post" className="flex gap-2">
+											<input
+												type="email"
+												name="restoreEmail"
+												placeholder="输入已有邮箱地址恢复收件箱"
+												className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+											/>
+											<Button
+												type="submit"
+												name="action"
+												value="restore"
+												variant="outline"
+												size="default"
+												className="h-10 border-blue-300 text-blue-700 hover:bg-blue-50 whitespace-nowrap"
+											>
+												恢复
+											</Button>
+										</Form>
+										{actionData && 'restoreError' in actionData && (
+											<p className="text-red-500 text-xs mt-1">{actionData.restoreError}</p>
 										)}
 									</div>
 
