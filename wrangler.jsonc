@@ -29,8 +29,5 @@
 	],
 	"assets": {
 		"directory": "./build/client"
-	},
-	"vars": {
-		"ENVIRONMENT": "production"
 	}
 }
