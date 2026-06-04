@@ -12,11 +12,12 @@ import {
 	attachments,
 	emails,
 	mailboxes,
+	sessions,
 } from "~/db/schema";
 
 // 创建 drizzle 实例
 export function createDB() {
-	return drizzle(env.DB, { schema: { mailboxes, emails, attachments } });
+	return drizzle(env.DB, { schema: { mailboxes, emails, attachments, sessions } });
 }
 
 // 通过邮箱地址获取或创建邮箱
@@ -149,6 +150,19 @@ export async function cleanupExpiredEmails(
 
 	// 删除过期的邮箱（CASCADE 会自动删除相关邮件和附件）
 	await db.delete(mailboxes).where(lte(mailboxes.expiresAt, now));
+}
+
+// 清理过期的 sessions
+export async function cleanupExpiredSessions(
+	db: ReturnType<typeof createDB>,
+): Promise<number> {
+	const now = new Date();
+
+	const result = await db
+		.delete(sessions)
+		.where(lte(sessions.expiresAt, now));
+
+	return result.rowsAffected || 0;
 }
 
 // 获取邮箱统计信息

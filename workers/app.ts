@@ -2,6 +2,7 @@ import PostalMime from "postal-mime";
 import { createRequestHandler } from "react-router";
 import {
 	cleanupExpiredEmails,
+	cleanupExpiredSessions,
 	createDB,
 	getOrCreateMailbox,
 	storeEmail,
@@ -63,8 +64,9 @@ export default {
 			// 创建数据库实例
 			const db = createDB();
 
-			// 清理过期邮件（异步执行，不阻塞当前邮件处理）
+			// 清理过期邮件和 sessions（异步执行，不阻塞当前邮件处理）
 			ctx.waitUntil(cleanupExpiredEmails(db));
+			ctx.waitUntil(cleanupExpiredSessions(db));
 
 			// 读取原始邮件内容
 			const rawEmailArray = await new Response(message.raw).arrayBuffer();
