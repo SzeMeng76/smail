@@ -60,11 +60,8 @@ export function createD1SessionStorage<
 			const id = session.id || nanoid();
 			const data = JSON.stringify(session.data);
 
-			// 计算过期时间
-			const maxAge = cookie.maxAge;
-			const expiresAt = maxAge
-				? new Date(Date.now() + maxAge * 1000)
-				: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 默认 7 天
+			// 计算过期时间（默认 7 天）
+			const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
 			try {
 				const db = createDB();
@@ -128,11 +125,10 @@ export async function cleanupExpiredSessions(): Promise<number> {
 		const db = createDB();
 		const now = new Date();
 
-		const result = await db
-			.delete(sessions)
-			.where(lte(sessions.expiresAt, now));
+		await db.delete(sessions).where(lte(sessions.expiresAt, now));
 
-		return result.rowsAffected || 0;
+		// D1 不返回 rowsAffected，返回 0 表示成功
+		return 0;
 	} catch (error) {
 		console.error("Error cleaning up expired sessions:", error);
 		return 0;

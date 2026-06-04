@@ -158,11 +158,10 @@ export async function cleanupExpiredSessions(
 ): Promise<number> {
 	const now = new Date();
 
-	const result = await db
-		.delete(sessions)
-		.where(lte(sessions.expiresAt, now));
+	await db.delete(sessions).where(lte(sessions.expiresAt, now));
 
-	return result.rowsAffected || 0;
+	// D1 不返回 rowsAffected，返回 0 表示成功
+	return 0;
 }
 
 // 获取邮箱统计信息
