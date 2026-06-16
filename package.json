@@ -12,7 +12,7 @@
 		"dev": "react-router dev",
 		"postinstall": "echo 'Skipping cf-typegen in CI environment'",
 		"preview": "pnpm run build && vite preview",
-		"typecheck": "pnpm run cf-typegen && react-router typegen && tsc -b",
+		"typecheck": "react-router typegen && tsc -b",
 		"format": "biome format --write",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "wrangler d1 migrations apply smail-database",

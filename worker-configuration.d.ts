@@ -8,6 +8,7 @@ interface __BaseEnv_Env {
 	ENVIRONMENT?: string;
 	AVAILABLE_DOMAINS?: string;
 	SESSION_SECRET: string;
+	ADMIN_PASSWORD?: string;
 }
 declare namespace Cloudflare {
 	interface GlobalProps {

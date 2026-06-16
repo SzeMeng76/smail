@@ -16,6 +16,7 @@ const sessionCookie = createCookie("__session", {
 
 type SessionData = {
 	email: string;
+	isLoggedIn?: boolean;
 };
 
 // 使用 D1 替代 KV 存储 session
